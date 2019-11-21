@@ -7,12 +7,17 @@ import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
+
+// TODO: Selecionando todos imóveis que não foram alugados (mesmo os vendidos)
+
 public class ImovelDAO {
     private String jdbcURL = "jdbc:mariadb://db-labsoft.ml:3306/t1g6?useSSL=false";
     private String jdbcUsername = "t1g6";
     private String jdbcPassword = "XFfwPhB";
 
     private static final String SELECT_HOUSES_FOR_RENT = "select * from Imovel where alugado=0";
+    private static final String SELECT_HOUSES_FOR_SALE = "select * from Imovel where vendido=0";
+    private static final String SELECT_HOUSE_BY_ID = "select * from Imovel where idImovel =?";
 
     public ImovelDAO() {
     }
@@ -33,24 +38,50 @@ public class ImovelDAO {
         return connection;
     }
 
-    public List<Imovel> selectHousesForRent() {
+    public List<Imovel> selectHousesByType(String tipo) {
         List<Imovel> houses = new ArrayList<>();
+        String statement;
+        if (tipo == "aluguel"){ statement = SELECT_HOUSES_FOR_RENT; }
+        else statement = SELECT_HOUSES_FOR_SALE;
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_HOUSES_FOR_RENT);) {
+             PreparedStatement preparedStatement = connection.prepareStatement(statement);) {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("idImovel");
-                float preçoAluguel = rs.getFloat("PreçoVenda");
+                float preço;
+                if (tipo == "aluguel") { preço = rs.getFloat("PreçoAluguel"); }
+                else { preço = rs.getFloat("PreçoVenda"); }
                 String descricao = rs.getString("Descrição");
                 String endereco = rs.getString("Endereço");
                 int idDono = rs.getInt("idDono");
-                houses.add(new Imovel(id, preçoAluguel, descricao, endereco, idDono));
+                houses.add(new Imovel(id, preço, descricao, endereco, idDono, tipo));
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
         return houses;
+    }
+
+    public Imovel selectImovelById(int id) {
+        Imovel house = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_HOUSE_BY_ID);) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                String endereço = rs.getString("Endereço");
+                String descrição = rs.getString("Descrição");
+                float preçoAluguel = rs.getFloat("preçoAluguel");
+                float preçoVenda = rs.getFloat("preçoVenda");
+                int idDono = rs.getInt("idDono");
+                house = new Imovel(id, endereço, descrição, preçoAluguel, preçoVenda, idDono);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return house;
     }
 
     private void printSQLException(SQLException ex) {

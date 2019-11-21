@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.javaguides.imovelnet.dao.ImovelDAO;
 import net.javaguides.imovelnet.model.Imovel;
-import net.javaguides.imovelnet.model.User;
 
 /**
  * ControllerServlet.java
@@ -43,6 +42,12 @@ public class ImovelServlet extends HttpServlet {
                 case "/rent":
                     listHousesToRent(request, response);
                     break;
+                case "/sale":
+                    listHousesToSale(request, response);
+                    break;
+                case "/house":
+                    showHouse(request, response);
+                    break;
                 default:
                     listHousesToRent(request, response);
                     break;
@@ -54,9 +59,26 @@ public class ImovelServlet extends HttpServlet {
     // Listar casa para alugar
     private void listHousesToRent(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<Imovel> houses = imovelDAO.selectHousesForRent();
+        List<Imovel> houses = imovelDAO.selectHousesByType("aluguel");
         request.setAttribute("houses", houses);
         RequestDispatcher dispatcher = request.getRequestDispatcher("forRent.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void listHousesToSale(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        List<Imovel> houses = imovelDAO.selectHousesByType("venda");
+        request.setAttribute("houses", houses);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("forSale.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showHouse(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Imovel house = imovelDAO.selectImovelById(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("house-page.jsp");
+        request.setAttribute("house", house);
         dispatcher.forward(request, response);
     }
 }

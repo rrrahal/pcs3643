@@ -10,13 +10,24 @@ public class Imovel {
     protected float preçoAluguel;
     protected Boolean vendido;
 
-    public Imovel(int idImovel, float preçoAluguel, String descricao, String endereco, int idDono) {
+    public Imovel(int idImovel, float preço, String descricao, String endereco, int idDono, String tipo) {
         this.idImovel = idImovel;
-        this.preçoAluguel = preçoAluguel;
+        if (tipo == "aluguel") { this.preçoAluguel = preço; }
+        else { this.preçoVenda = preço; }
         this.descrição = descricao;
         this.endereço = endereco;
         this.idDono = idDono;
     }
+
+    public Imovel(int idImovel, String endereço, String descrição, float preçoAluguel, float preçoVenda, int idDono) {
+        this.idImovel = idImovel;
+        this.descrição = descrição;
+        this.endereço = endereço;
+        this.idDono = idDono;
+        this.preçoAluguel = preçoAluguel;
+        this.preçoVenda = preçoVenda;
+    };
+
 
     public int getIdImovel() {
         return idImovel;
