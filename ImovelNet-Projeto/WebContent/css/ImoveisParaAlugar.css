@@ -1,0 +1,10 @@
+.houseCard {
+    margin: 16px;
+    background-color: red;
+}
+
+.imagemCasa {
+    display: block;
+    width: 200px;
+    height: 100px;
+}

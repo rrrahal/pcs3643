@@ -1,4 +1,4 @@
-package net.javaguides.usermanagement.dao;
+package net.javaguides.imovelnet.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.javaguides.usermanagement.model.User;
+import net.javaguides.imovelnet.model.User;
 
 /**
  * AbstractDAO.java This DAO class provides CRUD database operations for the

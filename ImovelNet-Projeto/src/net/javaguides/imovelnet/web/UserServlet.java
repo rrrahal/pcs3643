@@ -1,4 +1,4 @@
-package net.javaguides.usermanagement.web;
+package net.javaguides.imovelnet.web;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.javaguides.usermanagement.dao.UserDAO;
-import net.javaguides.usermanagement.model.User;
+import net.javaguides.imovelnet.dao.UserDAO;
+import net.javaguides.imovelnet.model.User;
 
 /**
  * ControllerServlet.java
  * This servlet acts as a page controller for the application, handling all
  * requests from the user.
  */
-
+/**
 @WebServlet("/")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -119,3 +119,5 @@ public class UserServlet extends HttpServlet {
 	}
 
 }
+
+ **/
