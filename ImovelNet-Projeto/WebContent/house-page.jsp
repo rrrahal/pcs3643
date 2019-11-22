@@ -31,144 +31,39 @@
                 <p class="card-text">${house.descrição}</p>
                 <p class="card-text">Preço: R$ ${house.preçoVenda}</p>
                 <p class="card-text">Aluguel: R$ ${house.preçoAluguel}</p>
+                <c:if test="${house.paraVender eq true}">
+                    <a class="btn btn-dark" href="house?id=${house.idImovel}" role="button" data-toggle="modal" data-target="#modalExemplo">Comprar</a>
+                </c:if>
+                <c:if test="${house.paraAlugar eq true}">
+                    <a class="btn btn-dark" href="house?id=${house.idImovel}" role="button" data-toggle="modal" data-target="#modalExemplo">Alugar</a>
+                </c:if>
             </div>
         </div>
     </div>
-    <!--
-          <div class="col-md">
-            <div class="card houseCard">
-              <img src="assets/ap2.png" class="card-img-top" alt="ap2" />
-              <div class="card-body">
-                <h3 class="card-title">Apartamento 2</h3>
-                <p class="card-text">Apartamento em Santana com 2 Quartos e 1 banheiro.</p>
-                <p class="card-text">Aluguel: R$ 2500.000</p>
-                <a class="btn btn-dark" href="#" role="button">Alugar</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md">
-              <div class="card houseCard">
-                  <img src="assets/ap3.png" class="card-img-top" alt="ap3" />
-                <div class="card-body">
-                  <h3 class="card-title">Apartamento 3</h3>
-                  <p class="card-text">Apartamento em Perdizes com 1 Quartos e 1 banheiro.</p>
-                <p class="card-text">Aluguel: R$ 2700.000</p>
-                <a class="btn btn-dark" href="#" role="button">Alugar</a>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-              </div>
+                <div class="modal-body">
+                    chama
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-secondary" data-dismiss="modal" href="id?id=${house.idImovel}">Alugar</a>
+                    <button type="button" class="btn btn-primary">Marcar Visita</button>
+                </div>
             </div>
         </div>
+    </div>
 
 
-        <div class="row">
-            <div class="col-md">
-              <div class="card houseCard">
-                  <img src="assets/ap4.png" class="card-img-top" alt="ap4" />
-                <div class="card-body">
-                  <h3 class="card-title">Apartamento 4</h3>
-                  <p class="card-text">Apartamento nos Jardins com 2 Quartos e 1 banheiro.</p>
-                <p class="card-text">Aluguel: R$ 10500.000</p>
-                <a class="btn btn-dark" href="#" role="button">Alugar</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md">
-              <div class="card houseCard">
-                  <img src="assets/ap5.png" class="card-img-top" alt="ap5" />
-                <div class="card-body">
-                  <h3 class="card-title">Apartamento 5</h3>
-                  <p class="card-text">Apartamento no Butantã com 2 Quartos e 1 banheiro.</p>
-                <p class="card-text">Aluguel: R$ 1000.000</p>
-                <a class="btn btn-dark" href="#" role="button">Alugar</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md">
-                <div class="card houseCard">
-                    <img src="assets/ap6.png" class="card-img-top" alt="ap6" />
-                  <div class="card-body">
-                      <h3 class="card-title">Apartamento 6</h3>
-                      <p class="card-text">Apartamento na Berrini com 1 Quartos e 1 banheiro.</p>
-                    <p class="card-text">Aluguel: R$ 3000.000</p>
-                    <a class="btn btn-dark" href="#" role="button">Alugar</a>
-                  </div>
-                </div>
-              </div>
-          </div>
-
-          <div class="row">
-              <div class="col-md">
-                <div class="card houseCard">
-                    <img src="assets/ap3.png" class="card-img-top" alt="ap7" />
-                  <div class="card-body">
-                      <h3 class="card-title">Apartamento 7</h3>
-                      <p class="card-text">Apartamento em Santana com 1 Quartos e 1 banheiro.</p>
-                    <p class="card-text">Aluguel: R$ 1500.000</p>
-                    <a class="btn btn-dark" href="#" role="button">Alugar</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md">
-                <div class="card houseCard">
-                    <img src="assets/ap2.png" class="card-img-top" alt="ap8" />
-                  <div class="card-body">
-                      <h3 class="card-title">Apartamento 8</h3>
-                      <p class="card-text">Apartamento em Pinheiros com 2 Quartos e 1 banheiro.</p>
-                    <p class="card-text">Aluguel: R$ 2500.000</p>
-                    <a class="btn btn-dark" href="#" role="button">Alugar</a>
-                  </div>
-                  </div>
-              </div>
-              <div class="col-md">
-                  <div class="card houseCard">
-                      <img src="assets/ap4.png" class="card-img-top" alt="ap9" />
-                    <div class="card-body">
-                        <h3 class="card-title">Apartamento 9</h3>
-                        <p class="card-text">Apartamento em Pinheiros com 2 Quartos e 2 banheiro.</p>
-                      <p class="card-text">Aluguel: R$ 3500.000</p>
-                      <a class="btn btn-dark" href="#" role="button">Alugar</a>
-                    </div>
-                  </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-md">
-                  <div class="card houseCard">
-                      <img src="assets/ap1.png" class="card-img-top" alt="ap10" />
-                    <div class="card-body">
-                        <h3 class="card-title">Apartamento 10</h3>
-                        <p class="card-text">Apartamento em Pinheiros com 5 Quartos e 4 banheiro.</p>
-                      <p class="card-text">Aluguel: R$ 8500.000</p>
-                      <a class="btn btn-dark" href="#" role="button">Alugar</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md">
-                  <div class="card houseCard">
-                      <img src="assets/ap2.png" class="card-img-top" alt="ap11" />
-                    <div class="card-body">
-                        <h3 class="card-title">Apartamento 11</h3>
-                        <p class="card-text">Apartamento em Pinheiros com 1 Quartos e 1 banheiro.</p>
-                      <p class="card-text">Aluguel: R$ 1500.000</p>
-                      <a class="btn btn-dark" href="#" role="button">Alugar</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md">
-                    <div class="card houseCard">
-                        <img src="assets/ap3.png" class="card-img-top" alt="ap12" />
-                      <div class="card-body">
-                          <h3 class="card-title">Apartamento 12</h3>
-                          <p class="card-text">Apartamento no Butantã com 1 Quartos e 1 banheiro.</p>
-                        <p class="card-text">Aluguel: R$ 1500.000</p>
-                        <a class="btn btn-dark" href="#" role="button">Alugar</a>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-        -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

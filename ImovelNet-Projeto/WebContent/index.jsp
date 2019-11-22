@@ -36,7 +36,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Vender</a>
+					<a class="nav-link" href="sale">Vender</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Relatórios</a>
@@ -58,8 +58,8 @@
 	<div class="container">
 		<h1>ImovelNet</h1>
 		<p class="lead">A sua plataforma para alugar ou vender imóveis.</p>
-		<button type="button" class="btn btn-primary btn-lg">Alugar</button>
-		<button type="button" class="btn btn-secondary btn-lg">Vender</button>
+		<a href="rent"><button type="button" class="btn btn-primary btn-lg">Alugar</button></a>
+		<a href="sale"><button type="button" class="btn btn-secondary btn-lg">Comprar</button></a>
 	</div>
 </section>
 

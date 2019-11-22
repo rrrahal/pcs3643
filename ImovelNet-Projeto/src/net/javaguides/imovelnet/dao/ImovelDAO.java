@@ -15,8 +15,8 @@ public class ImovelDAO {
     private String jdbcUsername = "t1g6";
     private String jdbcPassword = "XFfwPhB";
 
-    private static final String SELECT_HOUSES_FOR_RENT = "select * from Imovel where alugado=0";
-    private static final String SELECT_HOUSES_FOR_SALE = "select * from Imovel where vendido=0";
+    private static final String SELECT_HOUSES_FOR_RENT = "select * from Imovel where alugado=0 and paraAlugar=1";
+    private static final String SELECT_HOUSES_FOR_SALE = "select * from Imovel where vendido=0 and paraVender=1";
     private static final String SELECT_HOUSE_BY_ID = "select * from Imovel where idImovel =?";
 
     public ImovelDAO() {
@@ -55,7 +55,9 @@ public class ImovelDAO {
                 String descricao = rs.getString("Descrição");
                 String endereco = rs.getString("Endereço");
                 int idDono = rs.getInt("idDono");
-                houses.add(new Imovel(id, preço, descricao, endereco, idDono, tipo));
+                int paraVender = rs.getInt("paraVender");
+                int paraAlugar = rs.getInt("paraAlugar");
+                houses.add(new Imovel(id, preço, descricao, endereco, idDono, tipo, paraVender, paraAlugar));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -76,7 +78,9 @@ public class ImovelDAO {
                 float preçoAluguel = rs.getFloat("preçoAluguel");
                 float preçoVenda = rs.getFloat("preçoVenda");
                 int idDono = rs.getInt("idDono");
-                house = new Imovel(id, endereço, descrição, preçoAluguel, preçoVenda, idDono);
+                int paraVender = rs.getInt("paraVender");
+                int paraAlugar = rs.getInt("paraAlugar");
+                house = new Imovel(id, endereço, descrição, preçoAluguel, preçoVenda, idDono, paraVender, paraAlugar);
             }
         } catch (SQLException e) {
             printSQLException(e);

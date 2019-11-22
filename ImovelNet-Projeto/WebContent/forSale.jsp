@@ -33,7 +33,7 @@
                 <h3 class="card-title">Endereço: ${house.endereço}</h3>
                 <p class="card-text">${house.descrição}</p>
                 <p class="card-text">Preço: R$ ${house.preçoVenda}</p>
-                <a class="btn btn-dark" href="#" role="button">Comprar</a>
+                <a class="btn btn-dark" href="house?id=${house.idImovel}" role="button">Detalhes</a>
             </div>
         </div>
     </div>
