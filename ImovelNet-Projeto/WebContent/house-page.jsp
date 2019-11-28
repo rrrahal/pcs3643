@@ -27,10 +27,10 @@
     <div class="col-md">
         <div class="card houseCard">
             <div class="card-body">
-                <h3 class="card-title">Endereço: ${house.endereço}</h3>
-                <p class="card-text">${house.descrição}</p>
-                <p class="card-text">Preço: R$ ${house.preçoVenda}</p>
-                <p class="card-text">Aluguel: R$ ${house.preçoAluguel}</p>
+                <h3 class="card-title">Endereco: ${house.endereco}</h3>
+                <p class="card-text">${house.descricao}</p>
+                <p class="card-text">Preco: R$ ${house.precoVenda}</p>
+                <p class="card-text">Aluguel: R$ ${house.precoAluguel}</p>
                 <c:if test="${house.paraVender eq true}">
                     <a class="btn btn-dark" href="house?id=${house.idImovel}" role="button" data-toggle="modal" data-target="#modalExemplo">Comprar</a>
                 </c:if>

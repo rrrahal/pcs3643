@@ -4,20 +4,20 @@ public class Imovel {
     protected int idImovel;
     protected Boolean Alugado;
     protected int idDono;
-    protected float preçoVenda;
-    protected String descrição;
-    protected String endereço;
-    protected float preçoAluguel;
+    protected float precoVenda;
+    protected String descricao;
+    protected String endereco;
+    protected float precoAluguel;
     protected Boolean vendido;
     protected Boolean paraVender;
     protected Boolean paraAlugar;
 
-    public Imovel(int idImovel, float preço, String descricao, String endereco, int idDono, String tipo, int paraVender, int paraAlugar) {
+    public Imovel(int idImovel, float preco, String descricao, String endereco, int idDono, String tipo, int paraVender, int paraAlugar) {
         this.idImovel = idImovel;
-        if (tipo == "aluguel") { this.preçoAluguel = preço; }
-        else { this.preçoVenda = preço; }
-        this.descrição = descricao;
-        this.endereço = endereco;
+        if (tipo == "aluguel") { this.precoAluguel = preco; }
+        else { this.precoVenda = preco; }
+        this.descricao = descricao;
+        this.endereco = endereco;
         this.idDono = idDono;
         if (paraVender == 1) { this.paraVender = true; }
         else if ( paraVender == 0) { this.paraVender = false; }
@@ -25,13 +25,13 @@ public class Imovel {
         else if ( paraAlugar == 0) { this.paraAlugar = false; }
     }
 
-    public Imovel(int idImovel, String endereço, String descrição, float preçoAluguel, float preçoVenda, int idDono, int paraVender, int paraAlugar) {
+    public Imovel(int idImovel, String endereco, String descricao, float precoAluguel, float precoVenda, int idDono, int paraVender, int paraAlugar) {
         this.idImovel = idImovel;
-        this.descrição = descrição;
-        this.endereço = endereço;
+        this.descricao = descricao;
+        this.endereco = endereco;
         this.idDono = idDono;
-        this.preçoAluguel = preçoAluguel;
-        this.preçoVenda = preçoVenda;
+        this.precoAluguel = precoAluguel;
+        this.precoVenda = precoVenda;
         if (paraVender == 1) { this.paraVender = true; }
         else if ( paraVender == 0) { this.paraVender = false; }
         if (paraAlugar == 1) { this.paraAlugar = true; }
@@ -79,36 +79,36 @@ public class Imovel {
         this.idDono = idDono;
     }
 
-    public float getPreçoVenda() {
-        return preçoVenda;
+    public float getPrecoVenda() {
+        return precoVenda;
     }
 
-    public void setPreçoVenda(float preçoVenda) {
-        this.preçoVenda = preçoVenda;
+    public void setPrecoVenda(float precoVenda) {
+        this.precoVenda = precoVenda;
     }
 
-    public String getDescrição() {
-        return descrição;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescrição(String descrição) {
-        this.descrição = descrição;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getEndereço() {
-        return endereço;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setEndereço(String endereço) {
-        this.endereço = endereço;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
-    public float getPreçoAluguel() {
-        return preçoAluguel;
+    public float getPrecoAluguel() {
+        return precoAluguel;
     }
 
-    public void setPreçoAluguel(float preçoAluguel) {
-        this.preçoAluguel = preçoAluguel;
+    public void setPrecoAluguel(float precoAluguel) {
+        this.precoAluguel = precoAluguel;
     }
 
     public Boolean getVendido() {

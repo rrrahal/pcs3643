@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-// TODO: Selecionando todos imóveis que não foram alugados (mesmo os vendidos)
+// TODO: Selecionando todos imóveis que nao foram alugados (mesmo os vendidos)
 
 public class ImovelDAO {
     private String jdbcURL = "jdbc:mariadb://db-labsoft.ml:3306/t1g6?useSSL=false";
@@ -49,15 +49,15 @@ public class ImovelDAO {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("idImovel");
-                float preço;
-                if (tipo == "aluguel") { preço = rs.getFloat("PreçoAluguel"); }
-                else { preço = rs.getFloat("PreçoVenda"); }
-                String descricao = rs.getString("Descrição");
-                String endereco = rs.getString("Endereço");
+                float preco;
+                if (tipo == "aluguel") { preco = rs.getFloat("PrecoAluguel"); }
+                else { preco = rs.getFloat("PrecoVenda"); }
+                String descricao = rs.getString("Descricao");
+                String endereco = rs.getString("Endereco");
                 int idDono = rs.getInt("idDono");
                 int paraVender = rs.getInt("paraVender");
                 int paraAlugar = rs.getInt("paraAlugar");
-                houses.add(new Imovel(id, preço, descricao, endereco, idDono, tipo, paraVender, paraAlugar));
+                houses.add(new Imovel(id, preco, descricao, endereco, idDono, tipo, paraVender, paraAlugar));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -73,14 +73,14 @@ public class ImovelDAO {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                String endereço = rs.getString("Endereço");
-                String descrição = rs.getString("Descrição");
-                float preçoAluguel = rs.getFloat("preçoAluguel");
-                float preçoVenda = rs.getFloat("preçoVenda");
+                String endereco = rs.getString("Endereco");
+                String descricao = rs.getString("Descricao");
+                float precoAluguel = rs.getFloat("precoAluguel");
+                float precoVenda = rs.getFloat("precoVenda");
                 int idDono = rs.getInt("idDono");
                 int paraVender = rs.getInt("paraVender");
                 int paraAlugar = rs.getInt("paraAlugar");
-                house = new Imovel(id, endereço, descrição, preçoAluguel, preçoVenda, idDono, paraVender, paraAlugar);
+                house = new Imovel(id, endereco, descricao, precoAluguel, precoVenda, idDono, paraVender, paraAlugar);
             }
         } catch (SQLException e) {
             printSQLException(e);

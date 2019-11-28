@@ -32,9 +32,9 @@
             <div class="card houseCard">
                 <img src="<c:url value="/resources/assets/ap1.png" />" class="card-img-top imagemCasa" alt="ap1" />
                 <div class="card-body">
-                    <h3 class="card-title">Endereço: ${house.endereço}</h3>
-                    <p class="card-text">${house.descrição}</p>
-                    <p class="card-text">Aluguel: R$ ${house.preçoAluguel}</p>
+                    <h3 class="card-title">Endereco: ${house.endereco}</h3>
+                    <p class="card-text">${house.descricao}</p>
+                    <p class="card-text">Aluguel: R$ ${house.precoAluguel}</p>
                     <a class="btn btn-dark" href="house?id=${house.idImovel}" role="button">Detalhes</a>
                 </div>
             </div>

@@ -30,9 +30,9 @@
         <div class="card houseCard">
             <img src="<c:url value="/resources/assets/ap1.png" />" class="card-img-top" />
             <div class="card-body">
-                <h3 class="card-title">Endereço: ${house.endereço}</h3>
-                <p class="card-text">${house.descrição}</p>
-                <p class="card-text">Preço: R$ ${house.preçoVenda}</p>
+                <h3 class="card-title">Endereco: ${house.endereco}</h3>
+                <p class="card-text">${house.descricao}</p>
+                <p class="card-text">Preco: R$ ${house.precoVenda}</p>
                 <a class="btn btn-dark" href="house?id=${house.idImovel}" role="button">Detalhes</a>
             </div>
         </div>
@@ -81,7 +81,7 @@
                   <img src="assets/ap5.png" class="card-img-top" alt="ap5" />
                 <div class="card-body">
                   <h3 class="card-title">Apartamento 5</h3>
-                  <p class="card-text">Apartamento no Butantã com 2 Quartos e 1 banheiro.</p>
+                  <p class="card-text">Apartamento no Butanta com 2 Quartos e 1 banheiro.</p>
                 <p class="card-text">Aluguel: R$ 1000.000</p>
                 <a class="btn btn-dark" href="#" role="button">Alugar</a>
                 </div>
@@ -165,7 +165,7 @@
                         <img src="assets/ap3.png" class="card-img-top" alt="ap12" />
                       <div class="card-body">
                           <h3 class="card-title">Apartamento 12</h3>
-                          <p class="card-text">Apartamento no Butantã com 1 Quartos e 1 banheiro.</p>
+                          <p class="card-text">Apartamento no Butanta com 1 Quartos e 1 banheiro.</p>
                         <p class="card-text">Aluguel: R$ 1500.000</p>
                         <a class="btn btn-dark" href="#" role="button">Alugar</a>
                       </div>

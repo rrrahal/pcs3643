@@ -6,7 +6,7 @@ public class Locacao {
     protected String dataInicio;
     protected int idImovel;
     protected String dataFinal;
-    protected float preçoLocacao;
+    protected float precoLocacao;
 
     public int getIdLocacao() {
         return idLocacao;
@@ -44,11 +44,11 @@ public class Locacao {
         this.dataFinal = dataFinal;
     }
 
-    public float getPreçoLocacao() {
-        return preçoLocacao;
+    public float getPrecoLocacao() {
+        return precoLocacao;
     }
 
-    public void setPreçoLocacao(float preçoLocacao) {
-        this.preçoLocacao = preçoLocacao;
+    public void setPrecoLocacao(float precoLocacao) {
+        this.precoLocacao = precoLocacao;
     }
 }
