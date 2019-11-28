@@ -8,6 +8,11 @@ public class Usuario {
     protected String senha;
     protected String email;
 
+    public Usuario(int id,  String nome) {
+        this.idUsuario = id;
+        this.nome = nome;
+    }
+
     public int getIdUsuario() {
         return idUsuario;
     }
