@@ -37,6 +37,7 @@
                 <c:if test="${house.paraAlugar eq true}">
                     <a class="btn btn-dark" href="house?id=${house.idImovel}" role="button" data-toggle="modal" data-target="#modalExemplo">Alugar</a>
                 </c:if>
+                <a type="button" class="btn btn-secondary" href="schedule_visit?imovelId=${house.idImovel}">Marcar Visita</a>
             </div>
         </div>
     </div>
@@ -57,7 +58,7 @@
                 </div>
                 <div class="modal-footer">
                     <a type="button" class="btn btn-secondary" data-dismiss="modal" href="id?id=${house.idImovel}">Alugar</a>
-                    <button type="button" class="btn btn-primary">Marcar Visita</button>
+                    <a type="button" class="btn btn-primary" href="schedule_visit?imovelId=${house.idImovel}">Marcar Visita</a>
                 </div>
             </div>
         </div>

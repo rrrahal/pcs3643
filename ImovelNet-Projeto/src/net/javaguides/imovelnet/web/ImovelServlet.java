@@ -13,8 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import net.javaguides.imovelnet.dao.ImovelDAO;
 import net.javaguides.imovelnet.dao.UsuarioDAO;
+import net.javaguides.imovelnet.dao.VisitaDAO;
 import net.javaguides.imovelnet.model.Imovel;
 import net.javaguides.imovelnet.model.Usuario;
+import net.javaguides.imovelnet.model.Visita;
 
 /**
  * ControllerServlet.java
@@ -27,10 +29,12 @@ public class ImovelServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ImovelDAO imovelDAO;
     private UsuarioDAO usuarioDAO;
+    private VisitaDAO visitaDAO;
 
     public void init() {
         imovelDAO = new ImovelDAO();
         usuarioDAO = new UsuarioDAO();
+        visitaDAO = new VisitaDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -58,6 +62,12 @@ public class ImovelServlet extends HttpServlet {
                     break;
                 case "/handle_login":
                     handle_login(request, response);
+                    break;
+                case "/schedule_visit":
+                    schedule_visit(request, response);
+                    break;
+                case "/handle_visit":
+                    handle_visit(request, response);
                     break;
                 default:
                     login(request, response);
@@ -104,11 +114,39 @@ public class ImovelServlet extends HttpServlet {
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
             Usuario user = usuarioDAO.hangleLogin(email, senha);
-            System.out.println("Entrei aqui no serVlet");
             if (user != null) {
                 HttpSession session=request.getSession();
-                session.setAttribute("user", user);
+                session.setAttribute("idUsuario", user.getIdUsuario());
                 response.sendRedirect("index.jsp");
             }
+    }
+
+    private void schedule_visit(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("imovelId"));
+        Imovel house = imovelDAO.selectImovelById(id);
+        System.out.println("Entrei aqui no serVlet");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("schedule_visit.jsp");
+        request.setAttribute("house", house);
+        dispatcher.forward(request, response);
+    }
+
+    private void handle_visit(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int idImovel = Integer.parseInt(request.getParameter("idImovel"));
+        String data = request.getParameter("data");
+        String hora = request.getParameter("hora");
+        HttpSession session = request.getSession();
+        if (session.getAttribute("idUsuario") != null) {
+            int idUsuario = (Integer) session.getAttribute("idUsuario");
+            Visita visit = new Visita(idUsuario, idImovel, data, hora);
+            visitaDAO.insertUser(visit);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("visit_scheduled.jsp");
+            dispatcher.forward(request, response);
+        }
+        else {
+            System.out.println("O usuario não está logado!");
+        }
+
     }
 }
