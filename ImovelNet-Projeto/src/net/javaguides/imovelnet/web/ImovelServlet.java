@@ -11,12 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.javaguides.imovelnet.dao.ImovelDAO;
-import net.javaguides.imovelnet.dao.UsuarioDAO;
-import net.javaguides.imovelnet.dao.VisitaDAO;
-import net.javaguides.imovelnet.model.Imovel;
-import net.javaguides.imovelnet.model.Usuario;
-import net.javaguides.imovelnet.model.Visita;
+import net.javaguides.imovelnet.dao.*;
+import net.javaguides.imovelnet.model.*;
 
 /**
  * ControllerServlet.java
@@ -30,11 +26,15 @@ public class ImovelServlet extends HttpServlet {
     private ImovelDAO imovelDAO;
     private UsuarioDAO usuarioDAO;
     private VisitaDAO visitaDAO;
+    private LocacaoDAO locacaoDAO;
+    private VendaDAO vendaDAO;
 
     public void init() {
         imovelDAO = new ImovelDAO();
         usuarioDAO = new UsuarioDAO();
         visitaDAO = new VisitaDAO();
+        locacaoDAO = new LocacaoDAO();
+        vendaDAO = new VendaDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -68,6 +68,24 @@ public class ImovelServlet extends HttpServlet {
                     break;
                 case "/handle_visit":
                     handle_visit(request, response);
+                    break;
+                case "/make_rent":
+                    make_rent(request, response);
+                    break;
+                case "/handle_rent":
+                    handle_rent(request, response);
+                    break;
+                case "/make_sale" :
+                    make_sale(request, response);
+                    break;
+                case "/handle_sale":
+                    handle_sale(request, response);
+                    break;
+                case "/reports":
+                    make_reports(request, response);
+                    break;
+                case "/generate_rent_reports":
+                    make_rent_reports(request, response);
                     break;
                 default:
                     login(request, response);
@@ -117,6 +135,7 @@ public class ImovelServlet extends HttpServlet {
             if (user != null) {
                 HttpSession session=request.getSession();
                 session.setAttribute("idUsuario", user.getIdUsuario());
+                session.setAttribute("role", user.getRole());
                 response.sendRedirect("index.jsp");
             }
     }
@@ -125,7 +144,6 @@ public class ImovelServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("imovelId"));
         Imovel house = imovelDAO.selectImovelById(id);
-        System.out.println("Entrei aqui no serVlet");
         RequestDispatcher dispatcher = request.getRequestDispatcher("schedule_visit.jsp");
         request.setAttribute("house", house);
         dispatcher.forward(request, response);
@@ -148,5 +166,87 @@ public class ImovelServlet extends HttpServlet {
             System.out.println("O usuario não está logado!");
         }
 
+    }
+
+    private void handle_rent(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int idImovel = Integer.parseInt(request.getParameter("idImovel"));
+        String dataInicio = request.getParameter("dataInicio");
+        String dataFinal = request.getParameter("dataFinal");
+        float precoLocacao = Float.parseFloat(request.getParameter("precoLocacao"));
+        HttpSession session = request.getSession();
+        if (session.getAttribute("idUsuario") != null) {
+            int idUsuario = (Integer) session.getAttribute("idUsuario");
+            Locacao rent = new Locacao(idUsuario, dataInicio, idImovel, dataFinal, precoLocacao);
+            locacaoDAO.insertRent(rent);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("rent_done.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
+
+    private void make_rent(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int idImovel = Integer.parseInt(request.getParameter("idImovel"));
+        Imovel house = imovelDAO.selectImovelById(idImovel);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("make_rent.jsp");
+        request.setAttribute("house", house);
+        dispatcher.forward(request, response);
+    }
+
+    private void make_sale(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int idImovel = Integer.parseInt(request.getParameter("idImovel"));
+        Imovel house = imovelDAO.selectImovelById(idImovel);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("make_sale.jsp");
+        request.setAttribute("house", house);
+        dispatcher.forward(request, response);
+    }
+
+    private void handle_sale(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int idImovel = Integer.parseInt(request.getParameter("idImovel"));
+        String dataInicio = request.getParameter("dataInicio");
+        String dataFinal = request.getParameter("dataFim");
+        float valorEntrada = Float.parseFloat(request.getParameter("precoEntrada"));
+        int nParcelas = Integer.parseInt(request.getParameter("nParcelas"));
+        float valorParcelas = Float.parseFloat(request.getParameter("valorParcelas"));
+        HttpSession session = request.getSession();
+        if (session.getAttribute("idUsuario") != null) {
+            int idUsuario = (Integer) session.getAttribute("idUsuario");
+            Venda sale = new Venda(dataInicio, dataFinal, valorEntrada, nParcelas, valorParcelas, idUsuario, idImovel);
+            vendaDAO.insertSale(sale);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("sale_done.jsp");
+            dispatcher.forward(request, response);
+        }
+        else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
+
+    private void make_reports(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        HttpSession session = request.getSession();
+        System.out.println(session.getAttribute("role"));
+        String role = (String) session.getAttribute("role");
+        if (role.equalsIgnoreCase("ADMIN")) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("generate_reports.jsp");
+            dispatcher.forward(request, response);
+        }
+        else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
+
+    private void make_rent_reports(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        String dataInicio = request.getParameter("dataInicio");
+        String dataFinal = request.getParameter("dataFinal");
+        System.out.println("ENTREI AQUI!");
+        List<Locacao> rents = locacaoDAO.getRentedHouses();
+        request.setAttribute("rents", rents);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("rent_reports.jsp");
+        dispatcher.forward(request, response);
     }
 }

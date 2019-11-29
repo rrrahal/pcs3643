@@ -32,10 +32,10 @@
                 <p class="card-text">Preco: R$ ${house.precoVenda}</p>
                 <p class="card-text">Aluguel: R$ ${house.precoAluguel}</p>
                 <c:if test="${house.paraVender eq true}">
-                    <a class="btn btn-dark" href="house?id=${house.idImovel}" role="button" data-toggle="modal" data-target="#modalExemplo">Comprar</a>
+                    <a class="btn btn-dark" role="button" href="make_sale?idImovel=${house.idImovel}">Comprar</a>
                 </c:if>
                 <c:if test="${house.paraAlugar eq true}">
-                    <a class="btn btn-dark" href="house?id=${house.idImovel}" role="button" data-toggle="modal" data-target="#modalExemplo">Alugar</a>
+                    <a class="btn btn-dark" role="button" href="make_rent?idImovel=${house.idImovel}">Alugar</a>
                 </c:if>
                 <a type="button" class="btn btn-secondary" href="schedule_visit?imovelId=${house.idImovel}">Marcar Visita</a>
             </div>

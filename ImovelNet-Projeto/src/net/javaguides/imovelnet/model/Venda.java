@@ -7,6 +7,30 @@ public class Venda {
     protected float valorEntrada;
     protected String dataInicio;
     protected String dataFim;
+    protected int idUsuario;
+
+    public Venda(String dataInicio, String dataFim, float valorEntrada, int nParcelas, float valorParcelas, int idUsuario, int idImovel) {
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.valorEntrada = valorEntrada;
+        this.nParcelas = nParcelas;
+        this.valorParcelas = valorParcelas;
+        this.idUsuario = idUsuario;
+        this.idImovel = idImovel;
+    }
+
+
+    public void setIdVenda(int idVenda) {
+        this.idVenda = idVenda;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public int getIdVenda() {
         return idVenda;

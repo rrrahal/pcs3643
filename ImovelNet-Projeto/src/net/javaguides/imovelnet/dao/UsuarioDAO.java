@@ -11,6 +11,7 @@ public class UsuarioDAO {
     private String jdbcPassword = "XFfwPhB";
 
     private static final String CHECK_LOGIN = "select * from Usuario where email =? and senha=?";
+    private static final String GET_USER_BY_ID = "select * from Usuario where idUsuario=?";
 
     public UsuarioDAO() {
     }
@@ -31,6 +32,27 @@ public class UsuarioDAO {
         return connection;
     }
 
+    public Usuario getUsuarioById(int id) {
+        String statement = GET_USER_BY_ID;
+        Usuario user = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(statement);) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                String nome = rs.getString("Nome");
+                String role = rs.getString("Role");
+                String CPF = rs.getString("CPF");
+                String email = rs.getString("Email");
+                user = new Usuario(id, nome, role, CPF, email);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return user;
+    }
+
     public Usuario hangleLogin(String email, String senha) {
         String statement = CHECK_LOGIN;
         Usuario user = null;
@@ -42,8 +64,9 @@ public class UsuarioDAO {
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 String nome = rs.getString("Nome");
+                String role = rs.getString("Role");
                 int id = rs.getInt("IdUsuario");
-                user = new Usuario(id, nome);
+                user = new Usuario(id, nome, role);
             }
         } catch (SQLException e) {
             System.out.println(e);

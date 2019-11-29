@@ -7,6 +7,46 @@ public class Locacao {
     protected int idImovel;
     protected String dataFinal;
     protected float precoLocacao;
+    protected Usuario user;
+    protected Imovel house;
+
+    public void setIdLocacao(int idLocacao) {
+        this.idLocacao = idLocacao;
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
+
+    public Imovel getHouse() {
+        return house;
+    }
+
+    public void setHouse(Imovel house) {
+        this.house = house;
+    }
+
+    public Locacao(int idUsuario, String dataInicio, int idImovel, String dataFinal, float precoLocacao) {
+        this.idUsuario = idUsuario;
+        this.dataInicio = dataInicio;
+        this.idImovel = idImovel;
+        this.dataFinal = dataFinal;
+        this.precoLocacao = precoLocacao;
+    }
+
+    public Locacao(int idLocacao, int idUsuario, String dataInicio, int idImovel, String dataFinal, Float precoLocacao, Usuario user){
+        this.idLocacao = idLocacao;
+        this.idUsuario = idUsuario;
+        this.dataInicio = dataInicio;
+        this.idImovel = idImovel;
+        this.dataFinal = dataFinal;
+        this.precoLocacao = precoLocacao;
+        this.user = user;
+    }
 
     public int getIdLocacao() {
         return idLocacao;

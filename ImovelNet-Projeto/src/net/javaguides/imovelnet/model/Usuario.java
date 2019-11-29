@@ -8,9 +8,17 @@ public class Usuario {
     protected String senha;
     protected String email;
 
-    public Usuario(int id,  String nome) {
+    public Usuario(int id,  String nome, String role) {
         this.idUsuario = id;
         this.nome = nome;
+        this.role = role;
+    }
+    public Usuario(int id,  String nome, String role, String CPF, String Email) {
+        this.idUsuario = id;
+        this.nome = nome;
+        this.role = role;
+        this.cpf = CPF;
+        this.email = Email;
     }
 
     public int getIdUsuario() {
