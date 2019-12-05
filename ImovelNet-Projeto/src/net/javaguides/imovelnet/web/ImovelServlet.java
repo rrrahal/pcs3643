@@ -1,5 +1,6 @@
 package net.javaguides.imovelnet.web;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -171,8 +172,10 @@ public class ImovelServlet extends HttpServlet {
     private void handle_rent(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int idImovel = Integer.parseInt(request.getParameter("idImovel"));
-        String dataInicio = request.getParameter("dataInicio");
-        String dataFinal = request.getParameter("dataFinal");
+        String sdataInicio = request.getParameter("dataInicio");
+        String sdataFinal = request.getParameter("dataFinal");
+        Date dataInicio = Date.valueOf(sdataInicio);
+        Date dataFinal = Date.valueOf(sdataFinal);
         float precoLocacao = Float.parseFloat(request.getParameter("precoLocacao"));
         HttpSession session = request.getSession();
         if (session.getAttribute("idUsuario") != null) {

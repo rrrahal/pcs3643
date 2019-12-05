@@ -1,14 +1,25 @@
 package net.javaguides.imovelnet.model;
 
+import java.sql.Date;
+
 public class Locacao {
     protected int idLocacao;
     protected int idUsuario;
-    protected String dataInicio;
+    protected Date dataInicio;
     protected int idImovel;
-    protected String dataFinal;
+    protected Date dataFinal;
     protected float precoLocacao;
     protected Usuario user;
     protected Imovel house;
+    protected int numeroDeParcelas;
+
+    public int getNumeroDeParcelas() {
+        return numeroDeParcelas;
+    }
+
+    public void setNumeroDeParcelas(int numeroDeParcelas) {
+        this.numeroDeParcelas = numeroDeParcelas;
+    }
 
     public void setIdLocacao(int idLocacao) {
         this.idLocacao = idLocacao;
@@ -30,7 +41,7 @@ public class Locacao {
         this.house = house;
     }
 
-    public Locacao(int idUsuario, String dataInicio, int idImovel, String dataFinal, float precoLocacao) {
+    public Locacao(int idUsuario, Date dataInicio, int idImovel, Date dataFinal, float precoLocacao) {
         this.idUsuario = idUsuario;
         this.dataInicio = dataInicio;
         this.idImovel = idImovel;
@@ -38,7 +49,7 @@ public class Locacao {
         this.precoLocacao = precoLocacao;
     }
 
-    public Locacao(int idLocacao, int idUsuario, String dataInicio, int idImovel, String dataFinal, Float precoLocacao, Usuario user){
+    public Locacao(int idLocacao, int idUsuario, Date dataInicio, int idImovel, Date dataFinal, Float precoLocacao, Usuario user){
         this.idLocacao = idLocacao;
         this.idUsuario = idUsuario;
         this.dataInicio = dataInicio;
@@ -60,11 +71,11 @@ public class Locacao {
         this.idUsuario = idUsuario;
     }
 
-    public String getDataInicio() {
+    public Date getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(String dataInicio) {
+    public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
     }
 
@@ -76,11 +87,11 @@ public class Locacao {
         this.idImovel = idImovel;
     }
 
-    public String getDataFinal() {
+    public Date getDataFinal() {
         return dataFinal;
     }
 
-    public void setDataFinal(String dataFinal) {
+    public void setDataFinal(Date dataFinal) {
         this.dataFinal = dataFinal;
     }
 

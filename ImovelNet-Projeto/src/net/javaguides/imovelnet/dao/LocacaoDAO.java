@@ -4,8 +4,15 @@ import net.javaguides.imovelnet.model.Locacao;
 import net.javaguides.imovelnet.model.Usuario;
 
 import java.sql.*;
+import java.sql.Date;
 import java.util.List;
 import java.util.ArrayList;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
+
 
 public class LocacaoDAO {
     private String jdbcURL = "jdbc:mariadb://db-labsoft.ml:3306/t1g6?useSSL=false";
@@ -13,11 +20,12 @@ public class LocacaoDAO {
     private String jdbcPassword = "XFfwPhB";
     private UsuarioDAO usuarioDAO;
 
-    private static final String INSERT_RENT = "INSERT INTO Locacao" + "  (idUsuario, dataInicio, idImovel, dataFinal, precoLocacao) VALUES "
-            + " (?, ?, ?, ?, ?);";
+    private static final String INSERT_RENT = "INSERT INTO Locacao" + "  (idUsuario, dataInicio, idImovel, dataFinal, precoLocacao, parcelasRestantes) VALUES "
+            + " (?, ?, ?, ?, ?, ?);";
     private static final String CHANGE_HOUSE_TO_RENTED = "UPDATE Imovel set Alugado = 1 where idImovel = ?";
 
     private static final String SELECT_ALL_RENTED_HOUSES = "SELECT * FROM Locacao";
+    private static final String GET_USER_BY_ID = "select * from Usuario where idUsuario=?";
 
     public void init() {
         usuarioDAO = new UsuarioDAO();
@@ -47,11 +55,11 @@ public class LocacaoDAO {
             while(rs.next()) {
                 int idLocacao = rs.getInt("idLocacao");
                 int idUsuario = rs.getInt("idUsuario");
-                String dataFinal = rs.getString("DataFinal");
-                String dataInicio = rs.getString("DataInicio");
+                Date dataFinal = rs.getDate("DataFinal");
+                Date dataInicio = rs.getDate("DataInicio");
                 int idImovel = rs.getInt("idImovel");
                 Float precoLocacao = rs.getFloat("PrecoLocacao");
-                Usuario user = usuarioDAO.getUsuarioById(idUsuario);
+                Usuario user = this.getUsuarioById(idUsuario);
                 Locacao rent = new Locacao(idLocacao, idUsuario, dataInicio, idImovel, dataFinal, precoLocacao, user);
                 rents.add(rent);
             }
@@ -66,11 +74,14 @@ public class LocacaoDAO {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_RENT)) {
             preparedStatement.setInt(1, rent.getIdUsuario());
-            preparedStatement.setString(2, rent.getDataInicio());
+            preparedStatement.setDate(2, rent.getDataInicio());
             preparedStatement.setInt(3, rent.getIdImovel());
-            preparedStatement.setString(4, rent.getDataFinal());
+            preparedStatement.setDate(4, rent.getDataFinal());
             preparedStatement.setFloat(5, rent.getPrecoLocacao());
-            System.out.println(preparedStatement);
+            LocalDate dataInicio = rent.getDataInicio().toLocalDate();
+            LocalDate dataFinal = rent.getDataFinal().toLocalDate();
+            long months = ChronoUnit.MONTHS.between(dataInicio, dataFinal);
+            preparedStatement.setLong(6, months);
             preparedStatement.executeUpdate();
             PreparedStatement preparedStatement1 = connection.prepareStatement(CHANGE_HOUSE_TO_RENTED);
             preparedStatement1.setInt(1, rent.getIdImovel());
@@ -79,5 +90,26 @@ public class LocacaoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Usuario getUsuarioById(int id) {
+        String statement = GET_USER_BY_ID;
+        Usuario user = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(statement);) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                String nome = rs.getString("Nome");
+                String role = rs.getString("Role");
+                String CPF = rs.getString("CPF");
+                String email = rs.getString("Email");
+                user = new Usuario(id, nome, role, CPF, email);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return user;
     }
 }
