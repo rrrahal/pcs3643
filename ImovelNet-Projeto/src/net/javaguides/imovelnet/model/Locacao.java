@@ -48,6 +48,12 @@ public class Locacao {
         this.dataFinal = dataFinal;
         this.precoLocacao = precoLocacao;
     }
+    public Locacao(int idLocacao, int idUsuario, int idImovel, float precoLocacao) {
+        this.idLocacao = idLocacao;
+        this.idUsuario = idUsuario;
+        this.idImovel = idImovel;
+        this.precoLocacao = precoLocacao;
+    }
 
     public Locacao(int idLocacao, int idUsuario, Date dataInicio, int idImovel, Date dataFinal, Float precoLocacao, Usuario user){
         this.idLocacao = idLocacao;

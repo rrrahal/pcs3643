@@ -67,7 +67,17 @@
                             <p class="card-text">Endereço do Imovel: ${rent.getHouse().getEndereco()}</p>
                             <p class="card-text">Alugueis Restantes: ${rent.getParcelasRestantes()}</p>
                             <c:if test="${rent.getParcelasRestantes() eq 0}">
-                                <p class="card-text"> Aluguel Finalizado! </p>
+                                <p class="card-text"> Aluguel Finalizado!</p>
+                                <c:if test="${rent.getHouse().getAlugado() eq 0}">
+                                <form action="${pageContext.request.contextPath}/renew_rent?idLocacao=${rent.getIdLocacao()}" method="get">
+                                    DataInicio: <input type="date" name="dataInicio"/>
+                                    <br/>
+                                    DataFinal: <input type="date" name="dataFim"/>
+                                    <br />
+                                    <input type="hidden" name="idLocacao" value="${rent.getIdLocacao()}"/>
+                                    <input type="submit" class="btn btn-dark" value="Renovar">
+                                </form>
+                                </c:if>
                             </c:if>
                             <c:if test="${rent.getParcelasRestantes() ne 0}">
                                 <a class="btn btn-dark" role="button" href="pay_rent?idLocacao=${rent.getIdLocacao()}">Pagar Aluguel</a>

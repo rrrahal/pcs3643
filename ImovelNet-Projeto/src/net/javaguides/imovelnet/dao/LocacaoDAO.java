@@ -167,6 +167,22 @@ public class LocacaoDAO {
         }
     }
 
+    public Locacao getRentById(int idLocacao) {
+        String statement = SELECT_RENT_BY_ID;
+        Locacao rent = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(statement);) {
+            preparedStatement.setInt(1, idLocacao);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            rs.next();
+            rent = new Locacao(rs.getInt("idLocacao"), rs.getInt("idUsuario"), rs.getInt("idImovel"), rs.getFloat("precoLocacao"));
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return rent;
+    }
+
 
 
 

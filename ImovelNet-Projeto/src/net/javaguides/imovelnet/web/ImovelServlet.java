@@ -94,6 +94,9 @@ public class ImovelServlet extends HttpServlet {
                 case "/pay_rent":
                     pay_rent(request, response);
                     break;
+                case "/renew_rent":
+                    renew_rent(request,response);
+                    break;
                 default:
                     login(request, response);
                     break;
@@ -275,5 +278,19 @@ public class ImovelServlet extends HttpServlet {
         int idLocacao = Integer.parseInt(request.getParameter("idLocacao"));
         locacaoDAO.pay_rent(idLocacao);
         this.show_my_rents(request, response);
+    }
+
+    private void renew_rent(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int idLocacao = Integer.parseInt(request.getParameter("idLocacao"));
+        String sdataInicio = request.getParameter("dataInicio");
+        String sdataFinal = request.getParameter("dataFim");
+        Date dataInicio = Date.valueOf(sdataInicio);
+        Date dataFinal = Date.valueOf(sdataFinal);
+        Locacao oldRent = locacaoDAO.getRentById(idLocacao);
+        Locacao rent = new Locacao(oldRent.getIdUsuario(), dataInicio, oldRent.getIdImovel(), dataFinal, oldRent.getPrecoLocacao());
+        locacaoDAO.insertRent(rent);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("rent_done.jsp");
+        dispatcher.forward(request, response);
     }
 }
