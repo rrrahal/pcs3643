@@ -28,7 +28,6 @@
     <c:forEach var="house" items="${houses}">
     <div class="col-md">
         <div class="card houseCard">
-            <img src="<c:url value="/resources/assets/ap1.png" />" class="card-img-top" />
             <div class="card-body">
                 <h3 class="card-title">Endereco: ${house.endereco}</h3>
                 <p class="card-text">${house.descricao}</p>

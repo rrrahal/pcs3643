@@ -88,6 +88,12 @@ public class ImovelServlet extends HttpServlet {
                 case "/generate_rent_reports":
                     make_rent_reports(request, response);
                     break;
+                case "/my_rents":
+                    show_my_rents(request, response);
+                    break;
+                case "/pay_rent":
+                    pay_rent(request, response);
+                    break;
                 default:
                     login(request, response);
                     break;
@@ -246,10 +252,28 @@ public class ImovelServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         String dataInicio = request.getParameter("dataInicio");
         String dataFinal = request.getParameter("dataFinal");
-        System.out.println("ENTREI AQUI!");
         List<Locacao> rents = locacaoDAO.getRentedHouses();
         request.setAttribute("rents", rents);
         RequestDispatcher dispatcher = request.getRequestDispatcher("rent_reports.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void show_my_rents(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("idUsuario") != null) {
+            int idUsuario = (Integer) session.getAttribute("idUsuario");
+            List<Locacao> rents = locacaoDAO.getRentsByUserId(idUsuario);
+            request.setAttribute("rents", rents);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("my_rents.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
+
+    private void pay_rent(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int idLocacao = Integer.parseInt(request.getParameter("idLocacao"));
+        locacaoDAO.pay_rent(idLocacao);
+        this.show_my_rents(request, response);
     }
 }

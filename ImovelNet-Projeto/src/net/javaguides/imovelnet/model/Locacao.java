@@ -11,14 +11,14 @@ public class Locacao {
     protected float precoLocacao;
     protected Usuario user;
     protected Imovel house;
-    protected int numeroDeParcelas;
+    protected int parcelasRestantes;
 
-    public int getNumeroDeParcelas() {
-        return numeroDeParcelas;
+    public int getParcelasRestantes() {
+        return parcelasRestantes;
     }
 
-    public void setNumeroDeParcelas(int numeroDeParcelas) {
-        this.numeroDeParcelas = numeroDeParcelas;
+    public void setParcelasRestantes(int parcelasRestantes) {
+        this.parcelasRestantes = parcelasRestantes;
     }
 
     public void setIdLocacao(int idLocacao) {
@@ -57,6 +57,16 @@ public class Locacao {
         this.dataFinal = dataFinal;
         this.precoLocacao = precoLocacao;
         this.user = user;
+    }
+    public Locacao(int idLocacao, int idUsuario, Date dataInicio, int idImovel, Date dataFinal, Float precoLocacao, Usuario user, int parcelasRestantes){
+        this.idLocacao = idLocacao;
+        this.idUsuario = idUsuario;
+        this.dataInicio = dataInicio;
+        this.idImovel = idImovel;
+        this.dataFinal = dataFinal;
+        this.precoLocacao = precoLocacao;
+        this.user = user;
+        this.parcelasRestantes = parcelasRestantes;
     }
 
     public int getIdLocacao() {

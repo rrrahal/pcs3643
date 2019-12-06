@@ -39,7 +39,10 @@
 					<a class="nav-link" href="sale">Vender</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Relatórios</a>
+					<a class="nav-link" href="reports">Relatórios</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="my_rents">Meus Alugueis</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Contato</a>
