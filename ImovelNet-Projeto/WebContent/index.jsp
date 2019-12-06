@@ -45,6 +45,9 @@
 					<a class="nav-link" href="my_rents">Meus Alugueis</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" href="my_sales">Minhas Compras</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" href="#">Contato</a>
 				</li>
 			</ul>

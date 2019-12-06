@@ -97,6 +97,12 @@ public class ImovelServlet extends HttpServlet {
                 case "/renew_rent":
                     renew_rent(request,response);
                     break;
+                case "/my_sales":
+                    show_my_sales(request, response);
+                    break;
+                case "/pay_sale":
+                    pay_sale(request, response);
+                    break;
                 default:
                     login(request, response);
                     break;
@@ -292,5 +298,24 @@ public class ImovelServlet extends HttpServlet {
         locacaoDAO.insertRent(rent);
         RequestDispatcher dispatcher = request.getRequestDispatcher("rent_done.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void show_my_sales(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("idUsuario") != null) {
+            int idUsuario = (Integer) session.getAttribute("idUsuario");
+            List<Venda> sales = vendaDAO.getSalesByUserId(idUsuario);
+            request.setAttribute("sales", sales);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("my_sales.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
+
+    private void pay_sale(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int idVenda = Integer.parseInt(request.getParameter("idVenda"));
+        vendaDAO.pay_sale(idVenda);
+        this.show_my_sales(request, response);
     }
 }

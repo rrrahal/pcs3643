@@ -8,6 +8,8 @@ public class Venda {
     protected String dataInicio;
     protected String dataFim;
     protected int idUsuario;
+    protected Imovel house;
+    protected int parcelasPagas;
 
     public Venda(String dataInicio, String dataFim, float valorEntrada, int nParcelas, float valorParcelas, int idUsuario, int idImovel) {
         this.dataInicio = dataInicio;
@@ -17,6 +19,19 @@ public class Venda {
         this.valorParcelas = valorParcelas;
         this.idUsuario = idUsuario;
         this.idImovel = idImovel;
+    }
+
+    public Venda(int idVenda, String dataInicio, String dataFim, float valorEntrada, int nParcelas, float valorParcelas, int idUsuario, int idImovel, Imovel house, int parcelasPagas) {
+        this.idVenda = idVenda;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.valorEntrada = valorEntrada;
+        this.nParcelas = nParcelas;
+        this.valorParcelas = valorParcelas;
+        this.idUsuario = idUsuario;
+        this.idImovel = idImovel;
+        this.house = house;
+        this.parcelasPagas = parcelasPagas;
     }
 
 
@@ -85,5 +100,21 @@ public class Venda {
     }
 
     protected int idImovel;
+
+    public Imovel getHouse() {
+        return house;
+    }
+
+    public void setHouse(Imovel house) {
+        this.house = house;
+    }
+
+    public int getParcelasPagas() {
+        return parcelasPagas;
+    }
+
+    public void setParcelasPagas(int parcelasPagas) {
+        this.parcelasPagas = parcelasPagas;
+    }
 
 }
