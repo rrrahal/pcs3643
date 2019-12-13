@@ -13,15 +13,36 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark">
-    <ul class="nav navbar-nav">
-        <li class="nav-item active">
-            <a class="nav-link" href="#">ImóvelNet - Imóveis para venda <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">ImóvelNet - Página Inicial</a>
-        </li>
-    </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href=" ">ImovelNet</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="rent">Alugar
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sale">Vender</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reports">Relatórios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="my_rents">Meus Alugueis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="my_sales">Minhas Compras</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
 <div class="row m-5">
 

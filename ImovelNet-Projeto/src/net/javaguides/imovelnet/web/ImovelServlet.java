@@ -2,6 +2,7 @@ package net.javaguides.imovelnet.web;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -102,6 +103,9 @@ public class ImovelServlet extends HttpServlet {
                     break;
                 case "/pay_sale":
                     pay_sale(request, response);
+                    break;
+                case "/generate_sale_reports" :
+                    make_sale_reports(request, response);
                     break;
                 default:
                     login(request, response);
@@ -231,7 +235,7 @@ public class ImovelServlet extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("idUsuario") != null) {
             int idUsuario = (Integer) session.getAttribute("idUsuario");
-            Venda sale = new Venda(dataInicio, dataFinal, valorEntrada, nParcelas, valorParcelas, idUsuario, idImovel);
+            Venda sale = new Venda(Date.valueOf(dataInicio), Date.valueOf(dataFinal), valorEntrada, nParcelas, valorParcelas, idUsuario, idImovel);
             vendaDAO.insertSale(sale);
             RequestDispatcher dispatcher = request.getRequestDispatcher("sale_done.jsp");
             dispatcher.forward(request, response);
@@ -259,10 +263,16 @@ public class ImovelServlet extends HttpServlet {
 
     private void make_rent_reports(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
-        String dataInicio = request.getParameter("dataInicio");
-        String dataFinal = request.getParameter("dataFinal");
+        List<Locacao> valid_rents = new ArrayList<>();
+        String sdataInicio = request.getParameter("dataInicio");
+        Date dataInicio = Date.valueOf(sdataInicio);
         List<Locacao> rents = locacaoDAO.getRentedHouses();
-        request.setAttribute("rents", rents);
+        for (Locacao rent : rents) {
+            if(dataInicio.before(rent.getDataInicio())){
+                valid_rents.add(rent);
+            }
+        }
+        request.setAttribute("rents", valid_rents);
         RequestDispatcher dispatcher = request.getRequestDispatcher("rent_reports.jsp");
         dispatcher.forward(request, response);
     }
@@ -317,5 +327,22 @@ public class ImovelServlet extends HttpServlet {
         int idVenda = Integer.parseInt(request.getParameter("idVenda"));
         vendaDAO.pay_sale(idVenda);
         this.show_my_sales(request, response);
+    }
+
+    private void make_sale_reports(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        List<Venda> valid_sales = new ArrayList<>();
+        String sdataInicio = request.getParameter("dataInicio");
+        Date dataInicio = Date.valueOf(sdataInicio);
+        List<Venda> sales = vendaDAO.getSales();
+        for (Venda sale : sales) {
+            Date dataInicioSale = sale.getDataInicio();
+            if(dataInicio.before(dataInicioSale)){
+                valid_sales.add(sale);
+            }
+        }
+        request.setAttribute("sales", valid_sales);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("sale_reports.jsp");
+        dispatcher.forward(request, response);
     }
 }

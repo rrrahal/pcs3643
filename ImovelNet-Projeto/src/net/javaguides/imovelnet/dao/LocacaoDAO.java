@@ -63,7 +63,10 @@ public class LocacaoDAO {
                 int idImovel = rs.getInt("idImovel");
                 Float precoLocacao = rs.getFloat("PrecoLocacao");
                 Usuario user = this.getUsuarioById(idUsuario);
+                ImovelDAO imovelDAO = new ImovelDAO();
+                Imovel house = imovelDAO.selectImovelById(idImovel);
                 Locacao rent = new Locacao(idLocacao, idUsuario, dataInicio, idImovel, dataFinal, precoLocacao, user);
+                rent.setHouse(house);
                 rents.add(rent);
             }
         } catch (SQLException e) {

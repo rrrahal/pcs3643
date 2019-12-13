@@ -22,25 +22,30 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">ImovelNet</a>
+        <a class="navbar-brand" href=" ">ImovelNet</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/rent">Alugar
-                        <span class="sr-only">(current)</span>
+                <li class="nav-item">
+                    <a class="nav-link" href="rent">Alugar
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/sale">Vender</a>
+                    <a class="nav-link" href="sale">Vender</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Relatórios</a>
+                    <a class="nav-link" href="reports">Relatórios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contato</a>
+                    <a class="nav-link" href="my_rents">Meus Alugueis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="my_sales">Minhas Compras</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login">Login</a>
                 </li>
             </ul>
         </div>
@@ -61,9 +66,13 @@
                 <br/>
                 Data início: <input type="date" name="dataInicio"/>
                 <br/>
-                Data final: <input type="date" name="dataFinal" />
-                <br/>
                 <input type="submit" class="btn btn-dark" href="generate_rent_reports" value="Gerar relatórios de aluguel"/>
+            </form>
+            <form action="${pageContext.request.contextPath}/generate_sale_reports" method="get">
+                <br/>
+                Data início: <input type="date" name="dataInicio"/>
+                <br/>
+                <input type="submit" class="btn btn-dark" href="generate_sale_reports" value="Gerar relatórios de Venda"/>
             </form>
 
         </div>

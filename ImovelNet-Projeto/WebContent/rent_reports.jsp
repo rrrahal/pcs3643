@@ -22,25 +22,30 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">ImovelNet</a>
+        <a class="navbar-brand" href=" ">ImovelNet</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/rent">Alugar
-                        <span class="sr-only">(current)</span>
+                <li class="nav-item">
+                    <a class="nav-link" href="rent">Alugar
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/sale">Vender</a>
+                    <a class="nav-link" href="sale">Vender</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Relatórios</a>
+                    <a class="nav-link" href="reports">Relatórios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contato</a>
+                    <a class="nav-link" href="my_rents">Meus Alugueis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="my_sales">Minhas Compras</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login">Login</a>
                 </li>
             </ul>
         </div>
@@ -65,7 +70,13 @@
                             <p class="card-text">Nome do locatário: ${rent.getUser().getNome()}</p>
                             <p class="card-text">Email do locatário: ${rent.getUser().getEmail()}</p>
                             <p class="card-text">CPF do locatário: ${rent.getUser().getCpf()}</p>
-                            <p class="card-text">id do Imóvel: ${rent.getIdImovel()}</p>
+                            <p class="card-text">Endereço do Imóvel: ${rent.getHouse().getEndereco()}</p>
+                            <p class="card-text">Parcelas Faltantes: ${rent.getParcelasRestantes()}</p>
+                            <p class="card-text">Data início: ${rent.getDataInicio()}</p>
+                            <p class="card-text">Data Final: ${rent.getDataFinal()}</p>
+                            <c:if test="${rent.getParcelasRestantes() eq 0}">
+                                <p class="card-text"> Contrato Finalizado!</p>
+                            </c:if>
                         </div>
                     </div>
                 </div>

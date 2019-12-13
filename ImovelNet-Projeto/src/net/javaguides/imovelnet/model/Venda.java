@@ -1,17 +1,19 @@
 package net.javaguides.imovelnet.model;
 
+import java.sql.Date;
+
 public class Venda {
     protected int idVenda;
     protected float valorParcelas;
     protected int nParcelas;
     protected float valorEntrada;
-    protected String dataInicio;
-    protected String dataFim;
+    protected Date dataInicio;
+    protected Date dataFim;
     protected int idUsuario;
     protected Imovel house;
     protected int parcelasPagas;
 
-    public Venda(String dataInicio, String dataFim, float valorEntrada, int nParcelas, float valorParcelas, int idUsuario, int idImovel) {
+    public Venda(Date dataInicio, Date dataFim, float valorEntrada, int nParcelas, float valorParcelas, int idUsuario, int idImovel) {
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.valorEntrada = valorEntrada;
@@ -21,7 +23,7 @@ public class Venda {
         this.idImovel = idImovel;
     }
 
-    public Venda(int idVenda, String dataInicio, String dataFim, float valorEntrada, int nParcelas, float valorParcelas, int idUsuario, int idImovel, Imovel house, int parcelasPagas) {
+    public Venda(int idVenda, Date dataInicio, Date dataFim, float valorEntrada, int nParcelas, float valorParcelas, int idUsuario, int idImovel, Imovel house, int parcelasPagas) {
         this.idVenda = idVenda;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
@@ -75,19 +77,19 @@ public class Venda {
         this.valorEntrada = valorEntrada;
     }
 
-    public String getDataInicio() {
+    public Date getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(String dataInicio) {
+    public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public String getDataFim() {
+    public Date getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(String dataFim) {
+    public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
     }
 

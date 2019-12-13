@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ImovelNet - Visita marcada</title>
+    <title>ImovelNet - Relatórios</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -61,7 +61,27 @@
     <div class="container">
         <h1>ImovelNet</h1>
         <p class="lead">A sua plataforma para alugar ou vender imóveis.</p>
-        <h3> Visita marcada!</h3>
+        <div class="input-group mb-3">
+            <c:forEach var="sale" items="${sales}">
+                <div class="col-md">
+                    <div class="card houseCard">
+                        <div class="card-body">
+                            <h3 class="card-title">id da Venda: ${sale.getIdVenda()}</h3>
+                            <p class="card-text">Endereço do Imóvel: ${sale.getHouse().getEndereco()}</p>
+                            <p class="card-text">Valor Entrada: ${sale.getValorEntrada()}</p>
+                            <p class="card-text">Valor Parcelas: ${sale.getValorParcelas()}</p>
+                            <p class="card-text">Número Parcelas: ${sale.getnParcelas()}</p>
+                            <p class="card-text">Parcelas Pagas: ${sale.getParcelasPagas()}</p>
+                            <p class="card-text">Data início: ${sale.getDataInicio()}</p>
+                            <p class="card-text">Data Final: ${sale.getDataFim()}</p>
+                            <c:if test="${sale.getnParcelas() eq sale.getParcelasPagas()}">
+                                <p class="card-text"> Contrato Finalizado!</p>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
     </div>
 </section>
 

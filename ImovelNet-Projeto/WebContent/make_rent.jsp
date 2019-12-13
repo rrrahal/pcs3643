@@ -22,25 +22,30 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">ImovelNet</a>
+        <a class="navbar-brand" href=" ">ImovelNet</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/rent">Alugar
-                        <span class="sr-only">(current)</span>
+                <li class="nav-item">
+                    <a class="nav-link" href="rent">Alugar
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/sale">Vender</a>
+                    <a class="nav-link" href="sale">Vender</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Relatórios</a>
+                    <a class="nav-link" href="reports">Relatórios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contato</a>
+                    <a class="nav-link" href="my_rents">Meus Alugueis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="my_sales">Minhas Compras</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login">Login</a>
                 </li>
             </ul>
         </div>
@@ -61,7 +66,7 @@
                 DataInicio: <input type="date" name="dataInicio"/>
                 <br/>
                 DataFinal: <input type="date" name="dataFinal"/>
-                Preço do Aluguel: <input type="text" name="precoLocacao" />
+                Preço do Aluguel: <input type="text" name="precoLocacao" value="${house.precoAluguel}" />
                 <input type="hidden" name="idImovel" value="${house.idImovel}">
                 <input type="submit" value="enviar">
             </form>

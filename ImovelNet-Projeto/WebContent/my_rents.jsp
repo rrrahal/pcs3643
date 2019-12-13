@@ -22,15 +22,14 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">ImovelNet</a>
+        <a class="navbar-brand" href=" ">ImovelNet</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="rent">Alugar
-                        <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -40,13 +39,18 @@
                     <a class="nav-link" href="reports">Relatórios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contato</a>
+                    <a class="nav-link" href="my_rents">Meus Alugueis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="my_sales">Minhas Compras</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login">Login</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-
 <!-- Header - set the background image for the header in the line below -->
 <header class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1076');">
 </header>

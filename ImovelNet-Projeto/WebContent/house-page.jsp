@@ -13,28 +13,49 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark">
-    <ul class="nav navbar-nav">
-        <li class="nav-item active">
-            <a class="nav-link" href="#">ImóvelNet <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">ImóvelNet - Página Inicial</a>
-        </li>
-    </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href=" ">ImovelNet</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="rent">Alugar
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sale">Vender</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reports">Relatórios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="my_rents">Meus Alugueis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="my_sales">Minhas Compras</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
 <div class="row m-5">
     <div class="col-md">
         <div class="card houseCard">
             <div class="card-body">
-                <h3 class="card-title">Endereco: ${house.endereco}</h3>
+                <h3 class="card-title">Endereço: ${house.endereco}</h3>
                 <p class="card-text">${house.descricao}</p>
-                <p class="card-text">Preco: R$ ${house.precoVenda}</p>
-                <p class="card-text">Aluguel: R$ ${house.precoAluguel}</p>
                 <c:if test="${house.paraVender eq true}">
+                    <p class="card-text">Preco: R$ ${house.precoVenda}</p>
                     <a class="btn btn-dark" role="button" href="make_sale?idImovel=${house.idImovel}">Comprar</a>
                 </c:if>
                 <c:if test="${house.paraAlugar eq true}">
+                    <p class="card-text">Aluguel: R$ ${house.precoAluguel}</p>
                     <a class="btn btn-dark" role="button" href="make_rent?idImovel=${house.idImovel}">Alugar</a>
                 </c:if>
                 <a type="button" class="btn btn-secondary" href="schedule_visit?imovelId=${house.idImovel}">Marcar Visita</a>

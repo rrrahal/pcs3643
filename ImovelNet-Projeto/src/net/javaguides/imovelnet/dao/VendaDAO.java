@@ -24,6 +24,8 @@ public class VendaDAO {
 
     private static final String CHANGE_SALE_TO_FINISH = "UPDATE Venda Set Finalizada = 1 where idVenda = ?";
 
+    private static final String GET_SALES = "SELECT * FROM Venda";
+
     public VendaDAO() {
     }
 
@@ -47,8 +49,8 @@ public class VendaDAO {
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SALE)) {
-            preparedStatement.setString(1, sale.getDataInicio());
-            preparedStatement.setString(2, sale.getDataFim());
+            preparedStatement.setString(1, sale.getDataInicio().toString());
+            preparedStatement.setString(2, sale.getDataFim().toString());
             preparedStatement.setFloat(3, sale.getValorParcelas());
             preparedStatement.setInt(4, sale.getnParcelas());
             preparedStatement.setFloat(5, sale.getValorEntrada());
@@ -77,8 +79,8 @@ public class VendaDAO {
                 float valorParcelas = rs.getFloat("ValorParcelas");
                 int nParcelas = rs.getInt("NParcelas");
                 float valorEntrada = rs.getFloat("ValorEntrada");
-                String dataInicio = rs.getString("DataInicio");
-                String dataFim = rs.getString("DataFim");
+                Date dataInicio = rs.getDate("DataInicio");
+                Date dataFim = rs.getDate("DataFim");
                 int idImovel = rs.getInt("idImovel");
                 int parcelasPagas = rs.getInt("ParcelasPagas");
                 ImovelDAO imovelDAO = new ImovelDAO();
@@ -115,6 +117,34 @@ public class VendaDAO {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    public List<Venda> getSales() {
+        String statement = GET_SALES;
+        List<Venda> sales = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(statement);) {
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()) {
+                int idVenda = rs.getInt("idVenda");
+                float valorParcelas = rs.getFloat("ValorParcelas");
+                int nParcelas = rs.getInt("nParcelas");
+                float valorEntrada = rs.getFloat("ValorEntrada");
+                Date dataInicio = rs.getDate("DataInicio");
+                Date dataFim = rs.getDate("DataFim");
+                int idImovel = rs.getInt("idImovel");
+                int idUsuario = rs.getInt("idUsuario");
+                int parcelasPagas = rs.getInt("ParcelasPagas");
+                ImovelDAO imovelDAO = new ImovelDAO();
+                Imovel house = imovelDAO.selectImovelById(idImovel);
+                Venda sale = new Venda(idVenda, dataInicio, dataFim, valorEntrada, nParcelas, valorParcelas, idUsuario, idImovel, house, parcelasPagas);
+                sales.add(sale);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return sales;
     }
 
 }
